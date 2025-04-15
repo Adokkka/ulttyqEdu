@@ -1,7 +1,16 @@
 import React from "react";
+import { usePathname } from "next/navigation"; // Import usePathname
 import ProgressCourseItem from "./ProgressCourseItem";
 
 function InProgressCourseList({ userEnrolledCourses }) {
+  const pathname = usePathname(); // Get the current pathname
+
+  // Function to handle the button click to redirect to the /courses page
+  const handleViewAllCourses = () => {
+    // Redirect to /courses page
+    window.location.href = "/courses";
+  };
+
   return (
     <div className="p-5 bg-white mt-3 rounded-sm">
       <h2 className="text-primary text-[18px] font-semibold">
@@ -13,9 +22,18 @@ function InProgressCourseList({ userEnrolledCourses }) {
               <ProgressCourseItem key={index} course={item} />
             ))
           : [1, 2, 3, 4, 5].map((item, index) => (
-              <div className="h-[200px] w-[230px] bg-slate-200 animate-pulse"></div>
+              <div
+                className="h-[200px] w-[230px] bg-slate-200 animate-pulse"
+                key={index}
+              ></div>
             ))}
       </div>
+      <button
+        onClick={handleViewAllCourses} // Add click event handler
+        className="mt-5 px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+      >
+        Барлық Курстарды Көру
+      </button>
     </div>
   );
 }

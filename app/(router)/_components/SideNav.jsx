@@ -6,6 +6,7 @@ import {
   Mail,
   Menu as MenuIcon,
   X,
+  LogOut,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -13,7 +14,7 @@ import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 function SideNav() {
-  const { user } = useUser();
+  const { user, signOut } = useUser();
   const path = usePathname();
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -64,9 +65,8 @@ function SideNav() {
         className={`bg-white shadow-sm border p-5 
         fixed top-0 left-0 h-full z-50 w-64 
         transform transition-transform duration-300 ease-in-out
-        ${
-          isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
-        } md:translate-x-0 md:static md:block`}
+        ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"}
+        md:translate-x-0 md:static md:block`}
       >
         <Image src="/ulttuq.png" width={125} height={20} alt="logo" />
         <hr className="mt-7" />
@@ -89,6 +89,21 @@ function SideNav() {
               )
           )}
         </div>
+
+        {/* Logout Button */}
+        {user && (
+          <div className="mt-5">
+            <button
+              onClick={() => signOut()}
+              className="group flex gap-3 mt-2 p-3 text-[18px] items-center
+                text-gray-500 cursor-pointer hover:bg-primary hover:text-white
+                rounded-md transition-all ease-in-out duration-200"
+            >
+              <LogOut className="group-hover:animate-bounce" />
+              <h2>Шығу</h2>
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Overlay for mobile */}
